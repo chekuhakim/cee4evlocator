@@ -29,65 +29,31 @@
             box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
         }
         .panel-content {
-            display: flex;
-            align-items: center;
-        }
-        .panel-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
             background-color: #008000;
-            padding: 10px;
-            margin-right: 10px;
-            border-radius: 4px;
+            padding: 20px;
+            color: #fff;
         }
         .panel-details {
-            display: table;
+            margin-top: 20px;
+        }
+        .panel-details table {
             width: 100%;
-            margin-top: 20px;
+            border-collapse: collapse;
         }
-        .panel-details > div {
-            display: table-row;
+        .panel-details th,
+        .panel-details td {
+            padding: 8px;
+            border: 1px solid #ccc;
         }
-        .panel-details > div > div {
-            display: table-cell;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-        .panel-details > div:last-child > div {
-            border-bottom: none;
-        }
-        .panel-button {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .panel-button a {
-            display: flex;
-            align-items: center;
-            background-color: #008000;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 4px;
-            text-decoration: none;
-        }
-        .panel-button a i {
-            margin-right: 10px;
+        .panel-details th {
+            background-color: #f0f0f0;
         }
     </style>
 </head>
 <body>
     <div id="map"></div>
     <div class="slide-up-panel" id="panel">
-        <div class="panel-content">
-            <div class="panel-title" id="panelTitle"></div>
-            <div class="panel-button">
-                <a href="#" id="navigateButton">
-                    <i class="fas fa-car"></i>
-                    Navigate
-                </a>
-            </div>
-        </div>
+        <div class="panel-content" id="panelContent"></div>
         <div class="panel-details" id="panelDetails"></div>
     </div>
 
@@ -114,37 +80,81 @@
 
                 let content = `
                 <div>
-                    <h2 class="is-size-5">${item.Title}</h2>
-                    <p><b>Address:</b> ${item.address}</p>
-                    <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
-                    <p><b>Operational Time:</b> ${item['Operational Time']}</p>
-                    <p><b>Description:</b> ${item.Description}</p>
-                    <p><b>Type:</b> ${item.Type}</p>
-                    <div class="image-gallery">
-                        <img src="${item.photo1}" alt="Photo 1">
-                        <img src="${item.photo2}" alt="Photo 2">
-                        <img src="${item.photo3}" alt="Photo 3">
-                    </div>
-                    <div class="buttons">
-                        <a href="https://maps.google.com/?q=${coordinates[0]},${coordinates[1]}" target="_blank" class="button is-primary">Navigate</a>
-                        <a href="tel:${item.phone_number}" class="button is-link">Call</a>
+                    <h2 class="is-size-3 has-text-white">${item.Title}</h2>
+                    <div class="panel-details">
+                        <table class="table is-bordered is-fullwidth">
+                            <tbody>
+                                <tr>
+                                    <th>Address</th>
+                                    <td>${item.address}</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone</th>
+                                    <td><a href="tel:${item.phone_number}">${item.phone_number}</a></td>
+                                </tr>
+                                <tr>
+                                    <th>Operational Time</th>
+                                    <td>${item['Operational Time']}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description</th>
+                                    <td>${item.Description}</td>
+                                </tr>
+                                <tr>
+                                    <th>Type</th>
+                                    <td>${item.Type}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 `;
 
                 marker.on('click', function () {
-                    openPanel(item.Title, content);
+                    openPanel(content);
                 });
             }
 
             var group = new L.featureGroup(markers);
             map.fitBounds(group.getBounds());
 
-            function openPanel(title, content) {
-                document.getElementById('panelTitle').textContent = title;
-                document.getElementById('panelDetails').innerHTML = content;
+            var panelOpen = false;
+            var startY = 0;
+            var endY = 0;
+
+            function openPanel(content) {
+                if (panelOpen) return;
+
+                document.getElementById('panelContent').innerHTML = content;
                 document.getElementById('panel').style.height = '100%';
-                document.getElementById('navigateButton').href = "https://maps.google.com/?q=" + coordinates[0] + "," + coordinates[1];
+                panelOpen = true;
+
+                // Track touch events for swipe down
+                document.addEventListener('touchstart', handleTouchStart, false);
+                document.addEventListener('touchend', handleTouchEnd, false);
+            }
+
+            function closePanel() {
+                if (!panelOpen) return;
+
+                document.getElementById('panel').style.height = '0';
+                panelOpen = false;
+
+                // Remove touch event listeners
+                document.removeEventListener('touchstart', handleTouchStart, false);
+                document.removeEventListener('touchend', handleTouchEnd, false);
+            }
+
+            function handleTouchStart(e) {
+                startY = e.touches[0].clientY;
+            }
+
+            function handleTouchEnd(e) {
+                endY = e.changedTouches[0].clientY;
+
+                if (endY < startY) {
+                    closePanel();
+                }
             }
         })
         .catch(error => console.error('Error:', error));
