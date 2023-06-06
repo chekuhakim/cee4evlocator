@@ -111,19 +111,7 @@
                     <div class="address-container">
                         <p><b>Address:</b> ${item.address}</p>
                     </div>
-                    <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
-                    <p><b>Operational Time:</b> ${item['Operational Time']}</p>
-                    <p><b>Description:</b> ${item.Description}</p>
-                    <p><b>Type:</b> ${item.Type}</p>
-                    <div class="image-gallery">
-                        <img src="${item.photo1}" alt="Photo 1">
-                        <img src="${item.photo2}" alt="Photo 2">
-                        <img src="${item.photo3}" alt="Photo 3">
-                    </div>
-                    <div class="buttons">
-                        <a href="https://maps.google.com/?q=${coordinates[0]},${coordinates[1]}" target="_blank" class="button is-primary">Navigate</a>
-                        <a href="tel:${item.phone_number}" class="button is-link">Call</a>
-                    </div>
+                    <!-- Include other details as desired -->
                 </div>
                 `;
                 marker.on('click', () => openSection(content));
