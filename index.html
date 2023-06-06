@@ -23,16 +23,29 @@
             height: 50%;
             overflow-y: scroll;
             transition: bottom 0.3s ease-in-out;
-            background-color: #008000;
+            background-color: rgba(128, 128, 128, 0.8);
             color: #ffffff;
             z-index: 9999;
         }
         .section-container.active {
             bottom: 0;
         }
-        .details-table {
-            background-color: #ffffff;
-            color: #000000;
+        .title {
+            font-family: 'SF Pro Text', 'San Francisco', 'Helvetica Neue', 'Helvetica', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .subtitle {
+            font-family: 'SF Pro Text', 'San Francisco', 'Helvetica Neue', 'Helvetica', sans-serif;
+            font-size: 1rem;
+            color: #aaaaaa;
+        }
+        .address-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 10px;
+            margin-top: 10px;
         }
         .close-button {
             position: absolute;
@@ -54,7 +67,11 @@
     <div id="map"></div>
     <div id="sectionContainer" class="section-container">
         <div class="container">
-            <h1 class="title is-1 has-text-white has-background-success">Title</h1>
+            <h1 class="title">Title</h1>
+            <h2 class="subtitle">Subtitle</h2>
+            <div class="address-container">
+                <p>Address</p>
+            </div>
             <div class="close-button" onclick="closeSection()">
                 <span>&times;</span>
             </div>
@@ -89,8 +106,11 @@
 
                 let content = `
                 <div>
-                    <h2 class="is-size-5">${item.Title}</h2>
-                    <p><b>Address:</b> ${item.address}</p>
+                    <h1 class="title">${item.Title}</h1>
+                    <h2 class="subtitle">Subtitle</h2>
+                    <div class="address-container">
+                        <p><b>Address:</b> ${item.address}</p>
+                    </div>
                     <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
                     <p><b>Operational Time:</b> ${item['Operational Time']}</p>
                     <p><b>Description:</b> ${item.Description}</p>
@@ -127,4 +147,3 @@
     </script>
 </body>
 </html>
-
