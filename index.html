@@ -13,14 +13,14 @@
         }
         #map {
             width: 100%;
-            height: calc(100% - 80px);
+            height: calc(100% - 40px);
         }
         .section-container {
             position: fixed;
-            bottom: -100%;
+            bottom: -50%;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 50%;
             overflow-y: scroll;
             transition: bottom 0.3s ease-in-out;
             background-color: #008000;
@@ -112,6 +112,8 @@
             var group = new L.featureGroup(markers);
             map.fitBounds(group.getBounds());
 
+            map.on('click', () => closeSection());
+
             function openSection(content) {
                 document.getElementById('detailsTableBody').innerHTML = content;
                 document.getElementById('sectionContainer').classList.add('active');
@@ -125,3 +127,4 @@
     </script>
 </body>
 </html>
+
