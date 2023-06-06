@@ -13,39 +13,26 @@
         }
         #map {
             width: 100%;
-            height: calc(100% - 40px);
+            height: calc(100% - 80px);
         }
         .section-container {
             position: fixed;
-            bottom: -50%;
+            bottom: -100%;
             left: 0;
             width: 100%;
-            height: 50%;
+            height: 100%;
             overflow-y: scroll;
             transition: bottom 0.3s ease-in-out;
-            background-color: rgba(128, 128, 128, 0.8);
+            background-color: #008000;
             color: #ffffff;
             z-index: 9999;
         }
         .section-container.active {
             bottom: 0;
         }
-        .title {
-            font-family: 'SF Pro Text', 'San Francisco', 'Helvetica Neue', 'Helvetica', sans-serif;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ffffff;
-        }
-        .subtitle {
-            font-family: 'SF Pro Text', 'San Francisco', 'Helvetica Neue', 'Helvetica', sans-serif;
-            font-size: 1rem;
-            color: #aaaaaa;
-        }
-        .address-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 10px;
-            margin-top: 10px;
+        .details-table {
+            background-color: #ffffff;
+            color: #000000;
         }
         .close-button {
             position: absolute;
@@ -67,11 +54,7 @@
     <div id="map"></div>
     <div id="sectionContainer" class="section-container">
         <div class="container">
-            <h1 class="title">Title</h1>
-            <h2 class="subtitle">Subtitle</h2>
-            <div class="address-container">
-                <p>Address</p>
-            </div>
+            <h1 class="title is-1 has-text-white has-background-success">Title</h1>
             <div class="close-button" onclick="closeSection()">
                 <span>&times;</span>
             </div>
@@ -106,12 +89,21 @@
 
                 let content = `
                 <div>
-                    <h1 class="title">${item.Title}</h1>
-                    <h2 class="subtitle">Subtitle</h2>
-                    <div class="address-container">
-                        <p><b>Address:</b> ${item.address}</p>
+                    <h2 class="is-size-5">${item.Title}</h2>
+                    <p><b>Address:</b> ${item.address}</p>
+                    <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
+                    <p><b>Operational Time:</b> ${item['Operational Time']}</p>
+                    <p><b>Description:</b> ${item.Description}</p>
+                    <p><b>Type:</b> ${item.Type}</p>
+                    <div class="image-gallery">
+                        <img src="${item.photo1}" alt="Photo 1">
+                        <img src="${item.photo2}" alt="Photo 2">
+                        <img src="${item.photo3}" alt="Photo 3">
                     </div>
-                    <!-- Include other details as desired -->
+                    <div class="buttons">
+                        <a href="https://maps.google.com/?q=${coordinates[0]},${coordinates[1]}" target="_blank" class="button is-primary">Navigate</a>
+                        <a href="tel:${item.phone_number}" class="button is-link">Call</a>
+                    </div>
                 </div>
                 `;
                 marker.on('click', () => openSection(content));
@@ -119,8 +111,6 @@
 
             var group = new L.featureGroup(markers);
             map.fitBounds(group.getBounds());
-
-            map.on('click', () => closeSection());
 
             function openSection(content) {
                 document.getElementById('detailsTableBody').innerHTML = content;
