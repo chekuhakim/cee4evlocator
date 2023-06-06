@@ -15,16 +15,81 @@
             width: 100%;
             height: 100vh;
         }
-        .image-gallery img {
-            max-width: 100px;
-            max-height: 100px;
-            object-fit: cover;
-            margin: 5px;
+        .slide-up-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            z-index: 999;
+            overflow-y: scroll;
+            transition: height 0.3s ease-in-out;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .panel-content {
+            display: flex;
+            align-items: center;
+        }
+        .panel-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #008000;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+        .panel-details {
+            display: table;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .panel-details > div {
+            display: table-row;
+        }
+        .panel-details > div > div {
+            display: table-cell;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .panel-details > div:last-child > div {
+            border-bottom: none;
+        }
+        .panel-button {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .panel-button a {
+            display: flex;
+            align-items: center;
+            background-color: #008000;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .panel-button a i {
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
     <div id="map"></div>
+    <div class="slide-up-panel" id="panel">
+        <div class="panel-content">
+            <div class="panel-title" id="panelTitle"></div>
+            <div class="panel-button">
+                <a href="#" id="navigateButton">
+                    <i class="fas fa-car"></i>
+                    Navigate
+                </a>
+            </div>
+        </div>
+        <div class="panel-details" id="panelDetails"></div>
+    </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -66,11 +131,21 @@
                     </div>
                 </div>
                 `;
-                marker.bindPopup(content);
+
+                marker.on('click', function () {
+                    openPanel(item.Title, content);
+                });
             }
 
             var group = new L.featureGroup(markers);
             map.fitBounds(group.getBounds());
+
+            function openPanel(title, content) {
+                document.getElementById('panelTitle').textContent = title;
+                document.getElementById('panelDetails').innerHTML = content;
+                document.getElementById('panel').style.height = '100%';
+                document.getElementById('navigateButton').href = "https://maps.google.com/?q=" + coordinates[0] + "," + coordinates[1];
+            }
         })
         .catch(error => console.error('Error:', error));
     </script>
