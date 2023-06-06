@@ -48,13 +48,38 @@
             object-fit: cover;
             margin: 5px;
         }
+        
+        /* Custom Styles */
+        .location-title {
+            font-family: "SF Pro", Arial, sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            color: #ffffff;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+        .location-subtitle {
+            font-family: "SF Pro", Arial, sans-serif;
+            font-weight: normal;
+            font-size: 14px;
+            color: #808080;
+            margin-top: 5px;
+            margin-left: 10px;
+        }
+        .location-address {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div id="map"></div>
     <div id="sectionContainer" class="section-container">
         <div class="container">
-            <h1 class="title is-1 has-text-white has-background-success">Title</h1>
+            <h1 id="locationTitle" class="title is-1 has-text-white has-background-success">Title</h1>
             <div class="close-button" onclick="closeSection()">
                 <span>&times;</span>
             </div>
@@ -89,8 +114,11 @@
 
                 let content = `
                 <div>
-                    <h2 class="is-size-5">${item.Title}</h2>
-                    <p><b>Address:</b> ${item.address}</p>
+                    <h2 class="is-size-5 location-title">${item.Title}</h2>
+                    <p class="location-subtitle">Distance: ${item.Distance} km</p>
+                    <div class="location-address">
+                        <p><b>Address:</b> ${item.address}</p>
+                    </div>
                     <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
                     <p><b>Operational Time:</b> ${item['Operational Time']}</p>
                     <p><b>Description:</b> ${item.Description}</p>
