@@ -13,34 +13,31 @@
         }
         #map {
             width: 100%;
-            height: calc(100% - 80px);
+            height: 100vh;
         }
-        .section-container {
-            position: fixed;
-            bottom: -100%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow-y: scroll;
-            transition: bottom 0.3s ease-in-out;
-            background-color: #008000;
-            color: #ffffff;
-            z-index: 9999;
+        .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+            background-color: rgba(128,128,128,0.9);
+            border-radius: 10px;
         }
-        .section-container.active {
-            bottom: 0;
+        .leaflet-popup-content {
+            font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            color: white;
         }
-        .details-table {
-            background-color: #ffffff;
-            color: #000000;
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0 0 10px;
         }
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            color: #ffffff;
-            cursor: pointer;
+        .subtitle {
+            font-size: 14px;
+            color: lightgray;
+            margin: 10px 0 0 10px;
+        }
+        .address-container {
+            background-color: rgba(255,255,255,0.9);
+            border-radius: 5px;
+            padding: 5px;
+            margin: 10px 0 0 10px;
         }
         .image-gallery img {
             max-width: 100px;
@@ -48,48 +45,10 @@
             object-fit: cover;
             margin: 5px;
         }
-        
-        /* Custom Styles */
-        .location-title {
-            font-family: "SF Pro", Arial, sans-serif;
-            font-weight: bold;
-            font-size: 24px;
-            color: #ffffff;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-        .location-subtitle {
-            font-family: "SF Pro", Arial, sans-serif;
-            font-weight: normal;
-            font-size: 14px;
-            color: #808080;
-            margin-top: 5px;
-            margin-left: 10px;
-        }
-        .location-address {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
     <div id="map"></div>
-    <div id="sectionContainer" class="section-container">
-        <div class="container">
-            <h1 id="locationTitle" class="title is-1 has-text-white has-background-success">Title</h1>
-            <div class="close-button" onclick="closeSection()">
-                <span>&times;</span>
-            </div>
-            <div class="section">
-                <table class="table details-table">
-                    <tbody id="detailsTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -114,9 +73,9 @@
 
                 let content = `
                 <div>
-                    <h2 class="is-size-5 location-title">${item.Title}</h2>
-                    <p class="location-subtitle">Distance: ${item.Distance} km</p>
-                    <div class="location-address">
+                    <h2 class="title">${item.Title}</h2>
+                    <h3 class="subtitle">Location in km: ${/* This should be replaced with actual calculation */}</h3>
+                    <div class="address-container">
                         <p><b>Address:</b> ${item.address}</p>
                     </div>
                     <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
@@ -134,20 +93,11 @@
                     </div>
                 </div>
                 `;
-                marker.on('click', () => openSection(content));
+                marker.bindPopup(content);
             }
 
             var group = new L.featureGroup(markers);
             map.fitBounds(group.getBounds());
-
-            function openSection(content) {
-                document.getElementById('detailsTableBody').innerHTML = content;
-                document.getElementById('sectionContainer').classList.add('active');
-            }
-
-            function closeSection() {
-                document.getElementById('sectionContainer').classList.remove('active');
-            }
         })
         .catch(error => console.error('Error:', error));
     </script>
