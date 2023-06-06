@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EV Charging Locations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+        .image-gallery img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            var map = L.map('map').setView([4.2105, 101.9758], 7);  // Setting view to Malaysia
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+                maxZoom: 18,
+            }).addTo(map);
+
+            var markers = [];
+
+            for (let i = 0; i < data['Sheet1'].length; i++) {
+                let item = data['Sheet1'][i];
+                let coordinates = item['Coordinate '].split(', ').map(x => parseFloat(x));
+                let marker = L.marker(coordinates).addTo(map);
+
+                markers.push(marker);
+
+                let content = `
+                <div>
+                    <h2 class="is-size-5">${item.Title}</h2>
+                    <p><b>Address:</b> ${item.address}</p>
+                    <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
+                    <p><b>Operational Time:</b> ${item['Operational Time']}</p>
+                    <p><b>Description:</b> ${item.Description}</p>
+                    <p><b>Type:</b> ${item.Type}</p>
+                    <div class="image-gallery">
+                        <img src="${item.photo1}" alt="Photo 1">
+                        <img src="${item.photo2}" alt="Photo 2">
+                        <img src="${item.photo3}" alt="Photo 3">
+                    </div>
+                    <div class="buttons">
+                        <a href="https://maps.google.com/?q=${coordinates[0]},${coordinates[1]}" target="_blank" class="button is-primary">Navigate</a>
+                        <a href="tel:${item.phone_number}" class="button is-link">Call</a>
+                    </div>
+                </div>
+                `;
+                marker.bindPopup(content);
+            }
+
+            var group = new L.featureGroup(markers);
+            map.fitBounds(group.getBounds());
+        })
+        .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
