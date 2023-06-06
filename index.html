@@ -13,48 +13,57 @@
         }
         #map {
             width: 100%;
-            height: 100vh;
+            height: calc(100% - 80px);
         }
-        .slide-up-panel {
+        .section-container {
             position: fixed;
-            bottom: 0;
+            bottom: -100%;
             left: 0;
-            right: 0;
-            height: 0;
-            z-index: 999;
-            overflow-y: scroll;
-            transition: height 0.3s ease-in-out;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .panel-content {
-            background-color: #008000;
-            padding: 20px;
-            color: #fff;
-        }
-        .panel-details {
-            margin-top: 20px;
-        }
-        .panel-details table {
             width: 100%;
-            border-collapse: collapse;
+            height: 100%;
+            overflow-y: scroll;
+            transition: bottom 0.3s ease-in-out;
+            background-color: #008000;
+            color: #ffffff;
+            z-index: 9999;
         }
-        .panel-details th,
-        .panel-details td {
-            padding: 8px;
-            border: 1px solid #ccc;
+        .section-container.active {
+            bottom: 0;
         }
-        .panel-details th {
-            background-color: #f0f0f0;
+        .details-table {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        .image-gallery img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            margin: 5px;
         }
     </style>
 </head>
 <body>
     <div id="map"></div>
-    <div class="slide-up-panel" id="panel">
-        <div class="panel-content" id="panelContent"></div>
-        <div class="panel-details" id="panelDetails"></div>
+    <div id="sectionContainer" class="section-container">
+        <div class="container">
+            <h1 class="title is-1 has-text-white has-background-success">Title</h1>
+            <div class="close-button" onclick="closeSection()">
+                <span>&times;</span>
+            </div>
+            <div class="section">
+                <table class="table details-table">
+                    <tbody id="detailsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -80,81 +89,36 @@
 
                 let content = `
                 <div>
-                    <h2 class="is-size-3 has-text-white">${item.Title}</h2>
-                    <div class="panel-details">
-                        <table class="table is-bordered is-fullwidth">
-                            <tbody>
-                                <tr>
-                                    <th>Address</th>
-                                    <td>${item.address}</td>
-                                </tr>
-                                <tr>
-                                    <th>Phone</th>
-                                    <td><a href="tel:${item.phone_number}">${item.phone_number}</a></td>
-                                </tr>
-                                <tr>
-                                    <th>Operational Time</th>
-                                    <td>${item['Operational Time']}</td>
-                                </tr>
-                                <tr>
-                                    <th>Description</th>
-                                    <td>${item.Description}</td>
-                                </tr>
-                                <tr>
-                                    <th>Type</th>
-                                    <td>${item.Type}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <h2 class="is-size-5">${item.Title}</h2>
+                    <p><b>Address:</b> ${item.address}</p>
+                    <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
+                    <p><b>Operational Time:</b> ${item['Operational Time']}</p>
+                    <p><b>Description:</b> ${item.Description}</p>
+                    <p><b>Type:</b> ${item.Type}</p>
+                    <div class="image-gallery">
+                        <img src="${item.photo1}" alt="Photo 1">
+                        <img src="${item.photo2}" alt="Photo 2">
+                        <img src="${item.photo3}" alt="Photo 3">
+                    </div>
+                    <div class="buttons">
+                        <a href="https://maps.google.com/?q=${coordinates[0]},${coordinates[1]}" target="_blank" class="button is-primary">Navigate</a>
+                        <a href="tel:${item.phone_number}" class="button is-link">Call</a>
                     </div>
                 </div>
                 `;
-
-                marker.on('click', function () {
-                    openPanel(content);
-                });
+                marker.on('click', () => openSection(content));
             }
 
             var group = new L.featureGroup(markers);
             map.fitBounds(group.getBounds());
 
-            var panelOpen = false;
-            var startY = 0;
-            var endY = 0;
-
-            function openPanel(content) {
-                if (panelOpen) return;
-
-                document.getElementById('panelContent').innerHTML = content;
-                document.getElementById('panel').style.height = '100%';
-                panelOpen = true;
-
-                // Track touch events for swipe down
-                document.addEventListener('touchstart', handleTouchStart, false);
-                document.addEventListener('touchend', handleTouchEnd, false);
+            function openSection(content) {
+                document.getElementById('detailsTableBody').innerHTML = content;
+                document.getElementById('sectionContainer').classList.add('active');
             }
 
-            function closePanel() {
-                if (!panelOpen) return;
-
-                document.getElementById('panel').style.height = '0';
-                panelOpen = false;
-
-                // Remove touch event listeners
-                document.removeEventListener('touchstart', handleTouchStart, false);
-                document.removeEventListener('touchend', handleTouchEnd, false);
-            }
-
-            function handleTouchStart(e) {
-                startY = e.touches[0].clientY;
-            }
-
-            function handleTouchEnd(e) {
-                endY = e.changedTouches[0].clientY;
-
-                if (endY < startY) {
-                    closePanel();
-                }
+            function closeSection() {
+                document.getElementById('sectionContainer').classList.remove('active');
             }
         })
         .catch(error => console.error('Error:', error));
