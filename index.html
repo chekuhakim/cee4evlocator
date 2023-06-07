@@ -25,20 +25,15 @@
             transition: bottom 0.3s ease-in-out;
             color: #ffffff;
             z-index: 9999;
-            
-            /* Add the blur effect */
-            filter: blur(8px);
-            -webkit-filter: blur(8px);
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent black */
         }
         .section-container.active {
             bottom: 0;
         }
         .details-table {
-            color: #000000;
-
-            /* Add the blur effect */
-            filter: blur(8px);
-            -webkit-filter: blur(8px);
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.3);  /* Semi-transparent white */
         }
         .close-button {
             position: absolute;
@@ -54,36 +49,11 @@
             object-fit: cover;
             margin: 5px;
         }
-        
-        /* Custom Styles */
-        .location-title {
-            font-family: "SF Pro", Arial, sans-serif;
-            font-weight: bold;
-            font-size: 24px;
-            color: #ffffff;
-            margin-top: 10px;
-            margin-left: 10px;
+        h1.title.is-1.has-text-white.has-background-success {
+            background-color: transparent;
         }
-        .location-subtitle {
-            font-family: "SF Pro", Arial, sans-serif;
-            font-weight: normal;
-            font-size: 14px;
-            color: #808080;
-            margin-top: 5px;
-            margin-left: 10px;
-        }
-        .location-address {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        /* Center the buttons */
         .buttons {
-            display: flex;
-            justify-content: center;
+            text-align: center;
         }
     </style>
 </head>
@@ -126,9 +96,9 @@
 
                 let content = `
                 <div>
-                    <h2 class="is-size-5 location-title">${item.Title}</h2>
-                    <p class="location-subtitle">Distance: ${item.Distance} km</p>
-                    <div class="location-address">
+                    <h2 class="is-size-5">${item.Title}</h2>
+                    <p>Distance: ${item.Distance} km</p>
+                    <div>
                         <p><b>Address:</b> ${item.address}</p>
                     </div>
                     <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
@@ -146,15 +116,15 @@
                     </div>
                 </div>
                 `;
-                marker.on('click', () => openSection(content));
+                marker.on('click', () => openSection(content, item.Title));
             }
 
             var group = new L.featureGroup(markers);
             map.fitBounds(group.getBounds());
 
-            function openSection(content) {
-                document.getElementById('locationTitle').innerHTML = 'Details'; // Add this line
+            function openSection(content, title) {
                 document.getElementById('detailsTableBody').innerHTML = content;
+                document.getElementById('locationTitle').textContent = title;
                 document.getElementById('sectionContainer').classList.add('active');
             }
 
