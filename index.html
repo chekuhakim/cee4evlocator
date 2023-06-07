@@ -23,16 +23,22 @@
             height: 100%;
             overflow-y: scroll;
             transition: bottom 0.3s ease-in-out;
-            background-color: #008000;
             color: #ffffff;
             z-index: 9999;
+            
+            /* Add the blur effect */
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
         }
         .section-container.active {
             bottom: 0;
         }
         .details-table {
-            background-color: #ffffff;
             color: #000000;
+
+            /* Add the blur effect */
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
         }
         .close-button {
             position: absolute;
@@ -73,13 +79,19 @@
             margin-top: 10px;
             margin-bottom: 10px;
         }
+
+        /* Center the buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
     <div id="map"></div>
     <div id="sectionContainer" class="section-container">
         <div class="container">
-            <h1 id="locationTitle" class="title is-1 has-text-white has-background-success"></h1>
+            <h1 id="locationTitle" class="title is-1 has-text-white has-background-success">Title</h1>
             <div class="close-button" onclick="closeSection()">
                 <span>&times;</span>
             </div>
@@ -112,32 +124,28 @@
 
                 markers.push(marker);
 
-                let content = {
-                    body: `
-                    <div>
-                        <h2 class="is-size-5 location-title">${item.Title}</h2>
-                        <p class="location-subtitle">Distance: ${item.Distance} km</p>
-                        <div class="location-address">
-                            <p><b>Address:</b> ${item.address}</p>
-                        </div>
-                        <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
-                        <p><b>Operational Time:</b> ${item['Operational Time']}</p>
-                        <p><b>Description:</b> ${item.Description}</p>
-                        <p><b>Type:</b> ${item.Type}</p>
-                        <div class="image-gallery">
-                            <img src="${item.photo1}" alt="Photo 1">
-                            <img src="${item.photo2}" alt="Photo 2">
-                            <img src="${item.photo3}" alt="Photo 3">
-                        </div>
-                        <div class="buttons">
-                            <a href="https://maps.google.com/?q=${coordinates[0]},${coordinates[1]}" target="_blank" class="button is-primary">Navigate</a>
-                            <a href="tel:${item.phone_number}" class="button is-link">Call</a>
-                        </div>
+                let content = `
+                <div>
+                    <h2 class="is-size-5 location-title">${item.Title}</h2>
+                    <p class="location-subtitle">Distance: ${item.Distance} km</p>
+                    <div class="location-address">
+                        <p><b>Address:</b> ${item.address}</p>
                     </div>
-                    `,
-                    title: item.Title
-                };
-
+                    <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
+                    <p><b>Operational Time:</b> ${item['Operational Time']}</p>
+                    <p><b>Description:</b> ${item.Description}</p>
+                    <p><b>Type:</b> ${item.Type}</p>
+                    <div class="image-gallery">
+                        <img src="${item.photo1}" alt="Photo 1">
+                        <img src="${item.photo2}" alt="Photo 2">
+                        <img src="${item.photo3}" alt="Photo 3">
+                    </div>
+                    <div class="buttons">
+                        <a href="https://maps.google.com/?q=${coordinates[0]},${coordinates[1]}" target="_blank" class="button is-primary">Navigate</a>
+                        <a href="tel:${item.phone_number}" class="button is-link">Call</a>
+                    </div>
+                </div>
+                `;
                 marker.on('click', () => openSection(content));
             }
 
@@ -145,8 +153,8 @@
             map.fitBounds(group.getBounds());
 
             function openSection(content) {
-                document.getElementById('locationTitle').innerHTML = content.title;
-                document.getElementById('detailsTableBody').innerHTML = content.body;
+                document.getElementById('locationTitle').innerHTML = 'Details'; // Add this line
+                document.getElementById('detailsTableBody').innerHTML = content;
                 document.getElementById('sectionContainer').classList.add('active');
             }
 
