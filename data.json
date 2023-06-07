@@ -1,9 +1,9 @@
 {
   "Sheet1": [
     {
-      "Title": "CEE4EV - Grand Kampar Hotel (32A 1P CEE sockets)",
+      "Title": "CEE4EV - Grand Kampar Hotel",
       "address": "2188, Jalan Timah, Bandar Baru Kampar, 31900 Kampar, Negeri Perak, Malaysia",
-      "phone_number": "tel:+6054662111",
+      "phone_number": "6054662111",
       "Operational Time": "7am to 8pm",
       "Description": "Free for hotel guests, small fee for public\n 2 x 32A 1P Blue CEE socket max 7.4 kW\n 2 x 10A 3 pin sockets for PHEV @ 3kW",
       "Type": "Three Phase",
@@ -15,7 +15,7 @@
     {
       "Title": "CEE4EV - Coffee Bear 143 Cafe",
       "address": "1288-G, Persiaran Suriaman, Bandar Sri Sendayan, 71950 SEREMBAN, Negeri Sembilan, Malaysia",
-      "phone_number": "tel:+60189017731",
+      "phone_number": "+60189017731",
       "Operational Time": "11.30am-11.00pm",
       "Description": "2 x Red Commando 5pin, 22kW & 11kW",
       "Type": "Three Phase",
@@ -27,7 +27,7 @@
     {
       "Title": "CEE4EV - KAMPUNGSTAY DESA MURNI (11 kW AC)",
       "address": "Lot 1674 Jalan Homestay Desa Murni, 28020 Temerloh, Pahang",
-      "phone_number": "tel:012553471",
+      "phone_number": "+6012553471",
       "Operational Time": "Open 24/7",
       "Description": "Non-networked\n 1 x 11 kW AC T2 cabled\n CEE4EV members RM7/hr\n Non Members RM11/hr",
       "Type": "Type 2",
@@ -37,9 +37,9 @@
       "Coordinate ": "3.527691580457596, 102.39835054274839"
     },
     {
-      "Title": "CEE4EV - Highland CLINIC (1*13A, Single Phase 32A Blue CEE Available Soon)",
+      "Title": "CEE4EV - Highland CLINIC",
       "address": "7a, Jalan Corina 2, Kampung Raja, 39000 Tanah Rata, Pahang, Malaysia",
-      "phone_number": "tel:+60143065051",
+      "phone_number": "+60143065051",
       "Operational Time": "10am - 5pm",
       "Description": "3 pins wall plugs that allow 3kwh chsrging per hr.",
       "Type": "Wall (BS1363)",
@@ -49,9 +49,9 @@
       "Coordinate ": "4.558213050259465, 101.41596470820498"
     },
     {
-      "Title": "CEE4EV - Copthorne Hotel Cameron Highlands (Red CEE, 7.4 kW AC, 11 kW DC)",
+      "Title": "CEE4EV - Copthorne Hotel Cameron Highlands )",
       "address": "Unnamed Road, Brinchang, 39000 Brinchang, Pahang, Malaysia",
-      "phone_number": "tel:+60194794500",
+      "phone_number": "+60194794500",
       "Operational Time": "Open 24/7",
       "Description": "6 EV Charging Bays\n \n 1 x 11 kW DC CCS2 (Hotel guests : RM8/hr, Non Hotel Guests RM10/hr)\n \n 2 x 7 kW AC Type 2 cabled (Hotel guests RM 5/hr, Non hotel guests RM7/hr)\n \n 3 x 11 kW AC Type 2 cables (Hotel guests RM 8/hr, Non Hotel guests RM 10/hr)\n \n CEE4EV members RM4/hr for 7kw and RM6/hr for 11kw. \n Free 2 hrs charging for hotel guests from now till May 31 2023.",
       "Type": "Type 2",
@@ -61,9 +61,9 @@
       "Coordinate ": "4.505243318219087, 101.40873816460754"
     },
     {
-      "Title": "Shazan Hotel Kuantan (7 kW, 11 kW AC)",
+      "Title": "Shazan Hotel Kuantan ",
       "address": "Lot PT 240, Jalan Bukit Ubi, Jalan Masjid, Kompleks Pentadbiran Kerajaan Negeri Pahang, 25000 Kuantan, Pahang, Malaysia",
-      "phone_number": "tel:+60196568448",
+      "phone_number": "+60196568448",
       "Operational Time": "Open 24/7",
       "Description": "1 x 7 kW AC T2 cabled\n 1 X 11 kW AC T2 cabled",
       "Type": "Type 2",
@@ -74,7 +74,7 @@
     {
       "Title": "CEE4EV - Rilaks Port Dickson Homestay & Event (3 pin)",
       "address": "Fajar menyinsing\n Lot 1557, Kg Segenting, batu 11.5, jalan PD-melaka, port dickson",
-      "phone_number": "tel:+60123261922",
+      "phone_number": "+60123261922",
       "Operational Time": "Open 24/7",
       "Description": "10 x 3 pin socket only for the resort guests, allowing 10 ev / phev to charge at the same time.",
       "Type": "Wall (BS1363)",
@@ -83,9 +83,9 @@
       "Coordinate ": "2.4211771807182183, 101.87821004617813"
     },
     {
-      "Title": "CEE4EV - Kambing Bakar & Nasi Lemak Aroma (1phase 13A + 1 Phase 32A )",
+      "Title": "CEE4EV - Kambing Bakar & Nasi Lemak Aroma ",
       "address": "1, Jalan Raja Dr. Nazrin Shah, Taman Song Choon, 31350 Ipoh, Perak, Malaysia",
-      "phone_number": "tel:+60135123805",
+      "phone_number": "+60135123805",
       "Operational Time": "2 to 10pm",
       "Description": "1*3 pin@3kwh and 1*Blue CEE sockets@max 7.4kwh. Free charging if spend RM50 and above. Call to book for charging.",
       "Type": "Wall (BS1363)",
@@ -95,9 +95,9 @@
       "Coordinate ": "4.527676205999149, 101.13146880317265"
     },
     {
-      "Title": "CEE4EV - Iqra Damai Inn (3P 32A CEE, 7 - 22 kW)",
+      "Title": "CEE4EV - Iqra Damai Inn ",
       "address": "24, 189, 16300 Bachok, Kelantan, Malaysia",
-      "phone_number": "tel:+60197978595",
+      "phone_number": "+60197978595",
       "Operational Time": "Open 24/7",
       "Description": "1 x Red 32A 3P CEE socket support 7- 22 kW charging. \n Contact owner for the portable charger or bring own portable charger.",
       "Type": "Three Phase",
@@ -107,9 +107,9 @@
       "Coordinate ": "6.061082279619202, 102.40075578910552"
     },
     {
-      "Title": "CEE4EV - Fajar Homestay Manir, 7kw AC Type 2 + Blue CEE (Hourly Room Rate Available For EV Charging) Bring your own portable charger.",
+      "Title": "CEE4EV - Fajar Homestay Manir, ",
       "address": "Lot1337, Lorong Bunga Raya, Padang Tengir, 21200 Kuala Terengganu, Terengganu, Malaysia",
-      "phone_number": "tel:+60162081872",
+      "phone_number": "+60162081872",
       "Operational Time": "Office hours, call to book charging",
       "Description": "RM4.5/hr for CEE4EV members, RM7/hr for non members, Homestay guests RM5.5/hr.\n \n Bring your own portable charger . blue cee 32A",
       "Type": "Type 2",
@@ -119,9 +119,9 @@
       "Coordinate ": "5.287446414033467, 103.06891513506356"
     },
     {
-      "Title": "CEE4EV - Only You Homestay (7 to 22 kW AC)",
+      "Title": "CEE4EV - Only You Homestay ",
       "address": "PT 3423, Jalan Jati 1, , 18300 Gua Musang, Kelantan, Malaysia",
-      "phone_number": "tel:+60109115559",
+      "phone_number": "+60109115559",
       "Operational Time": "Mon to Wed 9am to 5pm, Thurs to Sat 24 hrs.",
       "Description": "Non-networked\n Call or Whatsapp in advance\n 7 to 22 kW charging\n 1 x 22 kW AC T2 cabled EVSE\n 2 x 3P 32A 5 pin Red CEE sockets",
       "Type": "Type 2",
@@ -142,18 +142,18 @@
       "Coordinate ": "3.0592178090658115, 101.4671666426563"
     },
     {
-      "Title": "CEE4EV- UMP GAMBANG (Type 2 Chargers and 3 phase 32A red CEE)",
+      "Title": "CEE4EV- UMP GAMBANG ",
       "address": "Blok W, Kampung Melayu Gambang, 26300 Gambang, Pahang, Malaysia",
-      "phone_number": "tel:+60197978595",
+      "phone_number": "+60197978595",
       "Operational Time": "Office hours",
       "Description": "One 22kwh AC with type 2 gun and a 3 phase 32A red CEE support ev charging from 7kwh to 22kwh.\n \n CEE4EV members pay : \n RM4/hr for charging at 7kw \n RM 7/hr for charging at 11kw \n RM14/hr for charging at 22kw\n \n Non members : \n RM7/hr for charging at 7kw \n RM 11/hr for charging at 11kw \n RM22/hr for charging at 22kwh",
       "Type": "Three Phase",
       "Coordinate ": "3.7230948696034534, 103.11952585846142"
     },
     {
-      "Title": "CEE4EV - UMP Pekan (3 x Red CEE 32A)",
+      "Title": "CEE4EV - UMP Pekan ",
       "address": "C101, Kampung Seberang, 26600 Pekan, Pahang, Malaysia",
-      "phone_number": "tel:+60197978598",
+      "phone_number": "+60197978598",
       "Operational Time": "office hours",
       "Description": "3P 32A red cee allow charging from 7 to 22kwh. CEE4EV members pay : \n RM4/hr for charging at 7kw \n RM 7/hr for charging at 11kw \n RM14/hr for charging at 22kwh\n \n Non members :\n RM7/hr for charging at 7kw \n RM 11/hr for charging at 11kw \n RM22/hr for charging at 22kwh",
       "Type": "Three Phase",
