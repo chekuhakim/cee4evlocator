@@ -35,3 +35,12 @@ Click on a marker to open a detailed information panel for the associated EV cha
 Click anywhere on the map or the "X" button to close the details panel.
 Use the 'Navigate' button to open Google Maps with the respective location pre-filled.
 Use the 'Call' button to initiate a phone call to the respective station.
+
+## Technologies Used
+
+This website uses several open-source technologies:
+
+- **HTML, CSS, and JavaScript**: The building blocks of any website.
+- **Leaflet**: An open-source JavaScript library for mobile-friendly interactive maps.
+- **OpenStreetMap**: Free to use under an open license, provides the map data used in this project.
+- **Bulma**: A free, open-source CSS framework based on Flexbox for modern web design.
