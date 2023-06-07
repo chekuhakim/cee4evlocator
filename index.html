@@ -47,6 +47,13 @@
         .section-container h2, .section-container p, .section-container a {
             color: #ffffff;
         }
+        .details-table {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .details-table h2, .details-table p, .details-table a {
+            color: #ffffff;
+        }
         .close-button {
             position: absolute;
             top: 10px;
@@ -64,36 +71,6 @@
         .buttons {
             text-align: center;
         }
-        .styled-table {
-            border-collapse: collapse;
-            margin: 25px 0;
-            font-size: 0.9em;
-            font-family: sans-serif;
-            min-width: 400px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-        }
-        .styled-table thead tr {
-            background-color: #009879;
-            color: #ffffff;
-            text-align: left;
-        }
-        .styled-table th,
-        .styled-table td {
-            padding: 12px 15px;
-        }
-        .styled-table tbody tr {
-            border-bottom: 1px solid #dddddd;
-        }
-        .styled-table tbody tr:nth-of-type(even) {
-            background-color: #f3f3f3;
-        }
-        .styled-table tbody tr:last-of-type {
-            border-bottom: 2px solid #009879;
-        }
-        .styled-table tbody tr.active-row {
-            font-weight: bold;
-            color: #009879;
-        }
     </style>
 </head>
 <body>
@@ -102,20 +79,20 @@
     </div>
     <div id="map"></div>
     <div id="sectionContainer" class="section-container">
-        <span id="closeButton" class="close-button">×</span>
-        <div id="detailsTableBody" class="styled-table"></div>
+        <div class="close-button" onclick="closeSection()">
+            <span>&times;</span>
+        </div>
+        <div id="detailsTableBody"></div>
     </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        document.getElementById('closeButton').addEventListener('click', closeSection);
-
-        fetch('https://api.npoint.io/dc28f997183b4776adda')
+        fetch('data.json')
         .then(response => response.json())
         .then(data => {
-            var map = L.map('map').setView([1.3521, 103.8198], 13);
+            var map = L.map('map').setView([4.2105, 101.9758], 7);  // Setting view to Malaysia
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
                 maxZoom: 18,
             }).addTo(map);
 
