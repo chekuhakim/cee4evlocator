@@ -26,14 +26,14 @@
             color: #ffffff;
             z-index: 9999;
             backdrop-filter: blur(10px);
-            background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent black */
+            background-color: rgba(0, 0, 0, 0.5);
         }
         .section-container.active {
             bottom: 0;
         }
         .details-table {
             backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.3);  /* Semi-transparent white */
+            background-color: rgba(0, 0, 0, 0.5);
         }
         .close-button {
             position: absolute;
@@ -49,19 +49,25 @@
             object-fit: cover;
             margin: 5px;
         }
-        h1.title.is-1.has-text-white.has-background-success {
-            background-color: transparent;
-        }
         .buttons {
             text-align: center;
         }
     </style>
+    <script>
+        function openSection(content) {
+            document.getElementById('detailsTableBody').innerHTML = content;
+            document.getElementById('sectionContainer').classList.add('active');
+        }
+
+        function closeSection() {
+            document.getElementById('sectionContainer').classList.remove('active');
+        }
+    </script>
 </head>
 <body>
     <div id="map"></div>
     <div id="sectionContainer" class="section-container">
         <div class="container">
-            <h1 id="locationTitle" class="title is-1 has-text-white has-background-success">Title</h1>
             <div class="close-button" onclick="closeSection()">
                 <span>&times;</span>
             </div>
@@ -97,8 +103,7 @@
                 let content = `
                 <div>
                     <h2 class="is-size-5">${item.Title}</h2>
-                    <p>Distance: ${item.Distance} km</p>
-                    <div>
+                    <div class="location-address">
                         <p><b>Address:</b> ${item.address}</p>
                     </div>
                     <p><b>Phone:</b> <a href="tel:${item.phone_number}">${item.phone_number}</a></p>
@@ -116,21 +121,11 @@
                     </div>
                 </div>
                 `;
-                marker.on('click', () => openSection(content, item.Title));
+                marker.on('click', () => openSection(content));
             }
 
             var group = new L.featureGroup(markers);
             map.fitBounds(group.getBounds());
-
-            function openSection(content, title) {
-                document.getElementById('detailsTableBody').innerHTML = content;
-                document.getElementById('locationTitle').textContent = title;
-                document.getElementById('sectionContainer').classList.add('active');
-            }
-
-            function closeSection() {
-                document.getElementById('sectionContainer').classList.remove('active');
-            }
         })
         .catch(error => console.error('Error:', error));
     </script>
