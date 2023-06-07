@@ -21,15 +21,15 @@ $ git clone https://github.com/your_username/cee4ev-charging-locations
 # Go into the repository
 $ cd cee4ev-charging-locations
 ```
-# Open index.html in your browser
-##Features
+Open index.html in your browser
+## Features
 Interactive map with markers for each EV charging station.
 Detailed information panel for each station, accessible by clicking the marker.
 Handy navigation and call buttons for direct routing and station contact.
 Map view fills entire browser for maximum visibility.
 Intuitive user interface with smooth animations.
 
-##Usage
+## Usage
 Open index.html in your browser to view the map.
 Click on a marker to open a detailed information panel for the associated EV charging station.
 Click anywhere on the map or the "X" button to close the details panel.
